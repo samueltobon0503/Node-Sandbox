@@ -1,0 +1,20 @@
+{
+  "name": "ts_server_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build":"npx tsc",
+    "dev":"node --watch dist/server.js ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@types/node": "^24.2.1"
+  }
+}
