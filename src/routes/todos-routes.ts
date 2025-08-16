@@ -3,10 +3,24 @@ import express, { Router, Request, Response } from "express";
 
 const todoRouter: Router = express.Router();
 
+interface todoResponse {
+    title: string,
+    body: string,
+    isDone: boolean,
+    createdAt: string
+}
+
+const todo: todoResponse = {
+    title: "Test todo",
+    body: "Hacer la cama",
+    isDone: false,
+    createdAt: "10/12/24"
+}
+
 todoRouter.get('/todos', (request: Request, response:Response) => { 
         response.json({
         ok: true,
-        data: [{}]
+        data: [{todo}]
     })
 });
 
