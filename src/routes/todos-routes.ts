@@ -1,4 +1,5 @@
 import express, { Router, Request, Response } from "express";
+import { todoParamsValidation } from "../middlewares/todosValidators";
 
 
 const todoRouter: Router = express.Router();
@@ -24,7 +25,7 @@ todoRouter.get('/todos', (request: Request, response:Response) => {
     })
 });
 
-todoRouter.post('/todos', (request: Request, response:Response) => { 
+todoRouter.post('/todos', todoParamsValidation, (request: Request, response:Response) => { 
         response.json({
         ok: true,
         staus: 'created',
