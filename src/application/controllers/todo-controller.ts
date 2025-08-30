@@ -1,8 +1,4 @@
-import express, { Router, Request, Response } from "express";
-import { todoParamsValidation } from "../middlewares/todosValidators";
-
-
-const todoRouter: Router = express.Router();
+import { Request, Response } from "express";
 
 interface todoResponse {
     title: string,
@@ -18,19 +14,18 @@ const todo: todoResponse = {
     createdAt: "10/12/24"
 }
 
-todoRouter.get('/todos', (request: Request, response:Response) => { 
+
+export const fetchTodos = (request: Request, response: Response) =>{
         response.json({
         ok: true,
         data: [{todo}]
     })
-});
+};
 
-todoRouter.post('/todos', todoParamsValidation, (request: Request, response:Response) => { 
+export const createTodo = (request: Request, response:Response) => { 
         response.json({
         ok: true,
         staus: 'created',
         data: [{}]
     })
-});
-
-export default todoRouter;
+};
