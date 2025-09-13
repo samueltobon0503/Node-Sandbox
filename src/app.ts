@@ -1,7 +1,9 @@
 import express, { Application } from "express";
 import observable$ from "./observable";
 import appRouter from "./application/routes/app-routes";
+import { dbConnection } from "./infraestructure/config/mongoDB";
 
+dbConnection();
 
 const PORT:number = 4000;
 const app : Application = express();

@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
-
-interface todoResponse {
-    title: string,
-    body: string,
-    isDone: boolean,
-    createdAt: string
-}
+import { getTodos, saveTodo } from "../../domain/services/todo-service";
+import { todoResponse } from "./interfaces/todo-response";
+import { ITodo } from "../../domain/models/ITodo";
 
 const todo: todoResponse = {
     title: "Test todo",
@@ -15,17 +11,38 @@ const todo: todoResponse = {
 }
 
 
-export const fetchTodos = (request: Request, response: Response) =>{
+export const fetchTodos = async (request: Request, response: Response) => {
+
+    try {
+        const todos = await getTodos();
         response.json({
-        ok: true,
-        data: [{todo}]
-    })
+            ok: true,
+            data: todos
+        })
+    } catch (error) {
+        console.error(error);
+        throw new Error("Se cagó la creación del todo");
+    }
+
 };
 
-export const createTodo = (request: Request, response:Response) => { 
+export const createTodo = async (request: Request, response: Response) => {
+    try {
+        const { title, body } = request.body;
+        const newTodo: ITodo = {
+            title: title,
+            body: body,
+            createdAt: new Date()
+        }
+        const result = await saveTodo(newTodo);
         response.json({
         ok: true,
         staus: 'created',
-        data: [{}]
+        data: result
     })
+    } catch (error) {
+        console.error(error);
+        throw new Error("Se cagó la creación del todo");
+    }
+
 };
